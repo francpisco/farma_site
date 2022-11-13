@@ -1,0 +1,51 @@
+{% extends "farma_site_app/base.html" %}
+
+{% block content %}
+
+<section class="principal bg-light">
+  <div class="container mt-5 pt-5">
+    <div class="display-5 text-center">Calendário</div>
+    <div class="display-6 text-center p-5">{{ today_s_date.day }} de {{ current_month_str }}, {{ today_s_date.year }}</div>
+    <div class="text-center lead p-2">Farmácia de serviço e outras informações disponiveís para esta semana:</div>
+   
+    <div class="row pb-3" style="height: min(30vw, 180px);">
+      {% for c in calendar_cells %}
+
+      <div class="col border text-center p-0 bg-white border-secondary {% if c.0.day == today_s_date.day %}border-3{% endif %}" style="border-radius: 3%; position: relative;">
+        <div style="font-size: min(2.5vw, 15px);">{{ c.1 }}</div>
+        <div class="mx-auto my-1 {% if c.0.day == today_s_date.day %}bg-primary text-light rounded-circle {% endif %}" style="width: min(28px, 4.5vw) ; height: min(28px, 4.5vw); font-size: min(3vw, 17px);">{{ c.0.day }}</div>
+        {% if c.2 is not none and c.2.farmacia_de_servico != '0' %}
+        <div {% if c.0 == today_s_date %}class="fw-bold text-primary"{% endif %} style="font-size: min(2.1vw, 16px);">{{ c.2.farmacia_de_servico }}</div>
+        {% elif c.3 is not none %}
+        <div {% if c.0 == today_s_date %}class="fw-bold text-primary"{% endif %} style="font-size: min(2.1vw, 16px);">{{ c.3 }}</div>
+        {% endif %}
+        {% if c.2.info is not none %}
+        <div style="font-size: min(1.8vw, 11px);">{{ c.2.info }}</div>
+        {% endif %}
+        {% if user.is_authenticated %} 
+        <div class="p-1" style="position: absolute; bottom: 5%; right: 5%"><a class="text-secondary"
+            href="{% if c.2 is not none %}{% url 'cal:edit_cal' c.2.id %}{% else %}{% url 'cal:new_cal' c.0.year c.0.month c.0.day %}{% endif %}"
+            style="font-size: min(1.8vw, 11px);">Editar</i></a>
+        </div>
+        {% endif %}
+      </div>
+
+        {% if forloop.counter == 7 %}
+    </div>
+    <div class="text-center lead pt-4 pb-1">Próxima semana:</div>
+    <div class="row pb-3" style="height: min(30vw, 180px);">
+        {% endif %}
+
+      {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="p-3 lead"><a class="text-secondary"
+      href="{% url 'cal:edit_all_cal' %}">Editar tudo</a>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+  </div>
+</section>
+
+{% endblock content %}

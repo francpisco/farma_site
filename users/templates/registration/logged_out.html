@@ -1,0 +1,11 @@
+{% extends "farma_site_app/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
+     style="height: 500px;">
+  <p class="lead">Você está log out. Obrigado pela visita.</p>
+  <p><a href="{% url 'farma_site_app:index' %}">Clique aqui para voltar à página principal.</a></p>
+
+</div>
+{% endblock content %}

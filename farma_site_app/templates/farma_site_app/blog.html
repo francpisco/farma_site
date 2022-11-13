@@ -1,0 +1,57 @@
+{% extends "farma_site_app/base.html" %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block content %}
+
+<!-- Blog -->
+<section class="principal bg-light" >
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center py-5 px-3">
+      <img src="{% static 'farma_site_app/img/blog-titulo.png' %}"
+           alt="titulo blog"
+           class="w-100 pt-3"
+           style="max-width: 800px;">
+    </div>
+    <div class="row g-4">
+
+      {% for entry in entries %}
+      <div class="col-12 col-md-6 col-xl-4 d-flex justify-content-center">
+        <div class="card bg-light border-0 py-3"
+             style="width:350px; height: 450px;">
+          <div class="blog-card w-100 h-50 d-flex align-items-end"
+               style="background-image: url({{ entry.image.url }})">
+            <p class="card-title display-6 text-light text-start p-3">{{ entry.title }}</p>
+          </div>
+          <div class="card-body">
+            {% language 'pt' %}
+            <p class="text-muted small">{{ entry.date_updated|date:'d F, Y' }}</p>
+            {% endlanguage %}
+            <p class="card-text">{{ entry.text|truncatewords:18 }}</p>
+            <a href="{% url 'farma_site_app:entry' entry.id %}"
+               class="btn btn-secondary">Ler mais</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>Ainda não há entradas no blog.</p>
+      {% endfor %}
+
+      {% include "pagination.html" with page=entries %}
+
+      {% if user.is_authenticated %}
+      <p class="lead p-5"><a class="text-secondary"
+           href="{% url 'farma_site_app:new_entry' %}">+ Adicione nova entrada ao
+          Blog</a>
+      </p> {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+
+{% endblock content %}

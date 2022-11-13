@@ -1,0 +1,66 @@
+{% extends "farma_site_app/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+<section class="principal bg-light pt-5">
+  <div class="display-5 text-center p-5">Editar Calendário</div>
+  {% language 'pt' %}
+  <div class="display-6 text-center p-3">{{ today|date:"j F, Y" }}</div>
+  {% endlanguage %}
+  <div class="container mx-auto"
+       style="min-height: 700px;">
+    <div class="row">
+      {% for d in days_of_week %}
+      <div class="col text-center p-1 text-secondary fw-bold" style="font-size: min(1.5vw, 15px)">{{ d }}</div>
+      {% endfor %}
+    </div>
+    
+    <form class="pb-4" action="{% url 'cal:edit_all_cal' %}" method="post">
+      {{ formset.management_form }} 
+      {% csrf_token %}
+      <div class="row">
+      {% for f in formset %}
+        <div class="col border border-secondary p-1 text-center {% if f.instance.day.month|divisibleby:2 %}bg-info{% else %}bg-white{% endif %}" style="font-size: min(1.4vw, 14px); border-radius: 3%;">
+          {% language 'pt' %}
+          <div class="text-center">{{ f.instance.day.day }} {% if f.instance.day.day == 1 %}{{ f.instance.day|date:"F" }}{% endif %}{% if f.instance.day.day == 1 and f.instance.day.month == 1 %} {{ f.instance.day.year }}{% endif %}</div>
+          {% endlanguage %}
+          <div class="text-center pb-1" style="font-size: min(1.2vw, 12px)">{{ f.instance.fds_excel }}</div>
+          {{ f.as_p }}
+        </div>
+      {% if forloop.counter|divisibleby:7 %}
+      </div>
+      <div class="row">
+      {% endif %}
+      {% endfor %}
+      </div>
+      <button class="btn btn-success btn-lg"
+              name="submit"
+              style="position: fixed; bottom: 20px; right: 15px;">Guardar</button>
+    </form>
+
+    
+  </div>
+</section>
+
+
+<script>
+  
+  (function () {
+    let elms = document.getElementsByTagName('input');
+    for (let i = 0; i < elms.length; i++) {
+      elms[i].style.width = '8vw'
+    }
+    let elms2 = document.getElementsByTagName('label');
+    for (let i = 0; i < elms2.length; i++) {
+      elms2[i].style.fontSize = 'min(1.2vw, 12px)'
+    }
+    let elms3 = document.getElementsByTagName('select');
+    for (let i = 0; i < elms3.length; i++) {
+      elms3[i].style.width = '8vw'
+    }
+  })();
+</script>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'farma_site_app/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="principal bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center py-5 px-3">
+      <img src="{% static 'farma_site_app/img/blog-titulo.png' %}"
+           alt="titulo blog"
+           class="w-100 pt-3"
+           style="max-width: 800px;">
+    </div>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-12 col-md-6 col-lg-5">
+          <img src="{{ entry.image.url }}"
+               alt="foto farmacia"
+               class="mw-100"
+               style="max-width: 500px;">
+        </div>
+        <div class="col-12 col-md-6 col-lg-5">
+          <p class="display-6">{{ entry.title }}</p>
+          {% language 'pt' %}
+          <p class="text-muted small">{{ entry.date_updated|date:'d F, Y' }}</p>
+          {% endlanguage %}
+          <p>{{ entry.text }}</p>
+
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+      <p class="lead px-5 py-3"><a href="{% url 'farma_site_app:blog' %}">Voltar</a>
+      </p>
+      {% if user.is_authenticated %}
+      <p class="lead p-5"><a class="text-success"
+           href="{% url 'farma_site_app:edit_entry' entry.id %}">Editar entrada</a>
+      </p>
+
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'farma_site_app/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<section class="principal bg-light">
+  <div class="container">
+
+    <p class="display-4 p-5 text-center">Contacto</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, doloribus amet. Nam recusandae maxime
+      mollitia molestiae, enim minus praesentium illo.</p>
+    <div class="row pt-4 pb-5">
+      <div class="col col-12 col-md-6 p-4">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="form-actions">
+            <button class="btn btn-secondary" type="submit">Enviar</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="col col-12 col-md-6 p-4">
+        <p class="display-6">Localização</p>
+        <p>Farmácia Pisco<br>Rua das Escolas, 23A<br>Portomar-Mira</p>
+        <!--The div element for the map -->
+        <div id="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.5078331102673!2d-8.730483784741418!3d40.44189577936224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd23b0c187403969%3A0xc1ce7220af69afe7!2sFarm%C3%A1cia%20Pisco!5e0!3m2!1spt-PT!2spt!4v1657793825507!5m2!1spt-PT!2spt"
+                  width="100%"
+                  height="400"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script>
+  (function () {
+    let elms = document.getElementsByTagName('input');
+    for (let i = 0; i < elms.length; i++) {
+      elms[i].classList.add('form-control');
+    }
+    let elms2 = document.getElementsByTagName('label');
+    for (let i = 0; i < elms2.length; i++) {
+      elms2[i].classList.add('form-label');
+    }
+    document.getElementsByTagName('textarea')[0].classList.add('form-control');
+  })();
+</script>
+
+
+{% endblock content %}

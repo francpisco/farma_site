@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Mali">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=VT323&display=swap" >
+  <link rel="icon"
+        href="{% static 'farma_site_app/img/logo-brid-primary.svg' %}">
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'farma_site_app/custom.min-6.css' %}">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'farma_site_app/custom.css' %}">
+  <title>Farmácia Pisco</title>
+</head>
+
+<body class="d-flex flex-column"
+      style="min-height: 100vh;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark py-3 fixed-top">
+    <div class="container">
+      <div class="marca" style="height: 40px;">
+        <a class="navbar-brand"
+           href="{% url 'farma_site_app:index' %}">
+          <img src="{% static 'farma_site_app/img/logo-light.svg' %}"
+               alt="logo famacia pisco"
+               class="d-inline-block align-text-top img-fluid h-100">
+        </a>
+      </div>
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse"
+           id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="{% url 'farma_site_app:index' %}#servicos"
+               class="nav-link">Serviços</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'farma_site_app:index' %}#horario"
+               class="nav-link">Horário</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'farma_site_app:index' %}#sobre"
+               class="nav-link">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'farma_site_app:blog' %}"
+               class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'cal:cal' %}"
+               class="nav-link">Calendário</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'farma_site_app:contacto' %}"
+               class="nav-link">Contacto</a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  {% block content %}{% endblock content %}
+
+
+  <!-- Footer -->
+  <footer class="p-3 bg-primary text-white">
+    <div class="container text-center">
+      <div class="row justify-content-between">
+        <div class="col-6 col-sm-3 order-2 order-sm-1 d-flex justify-content-start align-items-center">
+          {% if user.is_authenticated %}
+          <div class="d-flex flex-column">
+            <p class="text-light mb-0">Olá {{ user.username }},</p>
+            <p><a href="{% url 'users:logout' %}"
+                 class="text-light">Log out</a></p>
+          </div>
+          {% else %}
+          <a href="{% url 'users:login' %}"
+             class="text-light">Log in</a>
+          {% endif %}
+        </div>
+        <div class="col-12 col-sm-6 order-1 order-sm-2">
+          <div style="height: 50px;">
+            <a href="{% url 'farma_site_app:index' %}">
+              <img src="{% static 'farma_site_app/img/logo-light.svg' %}"
+                   alt="logo famacia pisco"
+                   class="h-75">
+            </a>
+          </div>
+
+          <div class="small pb-2">Dir. Técnica: Drª Lucília Pisco</div>
+          <div class="small pb-2">Fotos por Luís Rocha</div>
+          <div class="small pb-2 made-by-parent">&copy; 2022 <a href="https://linkedin.com/in/francisco-pisco-almeida-14a13913b" class="text-light made-by" target="_blank">Francisco Pisco Almeida</a>, Farmácia Pisco</div>
+        </div>
+        <div class="col-6 col-sm-3 order-3 order-sm-3 d-flex justify-content-end align-items-center">
+          <a href="#"
+             class="pe-3">
+            <i class="bi-facebook text-light h3"></i>
+          </a>
+          <a href="#">
+            <i class="bi-arrow-up-circle text-light h3"></i>
+          </a>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+  </footer>
+
+
+  <script src="{% static 'farma_site_app/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

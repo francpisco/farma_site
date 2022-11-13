@@ -1,0 +1,43 @@
+{% extends "farma_site_app/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
+     style="height: 500px;">
+  {% if form.errors %}
+  <p class="text-danger">Por favor escreva username e password correctos. Tome atenção às maiúsculas e minúsculas.</p>
+  {% endif %}
+
+  <form method="post"
+        action="{% url 'users:login' %}">
+    {% csrf_token %}
+    <p>
+      <label for="username"
+             class="form-label">Username:</label>
+      {{ form.username }}
+    </p>
+    <p>
+      <label for="password"
+             class="form-label">Password:</label>
+      {{ form.password }}
+    </p>
+    <p>
+      <button name="submit"
+              class="btn btn-secondary">Log in</button>
+    </p>
+    <input type="hidden"
+           name="next"
+           value="{% url 'farma_site_app:index' %}" />
+  </form>
+</div>
+
+<script>
+  (function () {
+    let elms = document.getElementsByTagName('input');
+    for (let i = 0; i < elms.length; i++) {
+      elms[i].classList.add('form-control');
+    }
+  })();
+</script>
+
+{% endblock content %}

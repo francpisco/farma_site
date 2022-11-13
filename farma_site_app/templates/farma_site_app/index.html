@@ -1,0 +1,127 @@
+{% extends "farma_site_app/base.html" %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block content %}
+<!-- Showcase -->
+<div style="height: 100vh">
+  <section class="text-center background-photo">
+    <div class="container h-100 w-100 d-flex align-items-center justify-content-end">
+      <div class="p-3 text-light lateral-text">
+        <img src="{% static 'farma_site_app/img/logo-light.svg' %}"
+             alt="logo famacia pisco"
+             class="w-100">
+        <p class="h4"
+           style="font-family: 'Mali', cursive;">A sua Farmácia no Concelho de Mira</p>
+        <p class="h6">Uma farmácia de confiança onde pode encontrar os produtos que precisa com o aconselhamento mais informado.</p>
+        <p class="h6">Tlf: 231 452 466, <a class="h6 text-light" href="{% url 'farma_site_app:contacto' %}" style="text-decoration: none;">Contate-nos</a></p>
+      </div>
+    </div>
+  
+  </section>
+</div>
+
+
+
+<!-- Servicos -->
+<section class="py-5 px-4 bg-light"
+         id="servicos"
+         style="scroll-margin-top: 60px;">
+  <div class="container">
+    <p class="display-5 text-secondary">Serviços</p>
+    <div class="row g-4 py-4">
+
+      {% for servico in servicos %}
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+        <div class="servico-card card text-light">
+          <div class="card-body servico-card-child" style="background-image: url({{ servico.image.url }});">
+            <p class="card-text">
+            <p class="h4">{{ servico.title }}</p>
+            <p style="font-size: min(16px, 2.5vw);">{{ servico.text }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>Ainda não há serviços disponiveis</p>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- Últimas entradas do blog -->
+<section class="bg-light border-top border-1 border-secondary" style="scroll-margin-top: 60px;">
+  <div class="container py-5">
+    <div class="display-6 text-center p-3">Recentemente no nosso Blog:</div>
+
+    {% for entry in entries %}
+    <div class="d-flex py-3">
+      <img src="{{ entry.image.url }}" alt="blog entry image" class="rounded" style="height: 150px; width: 150px">
+      <div class="ps-3">
+        <div class="lead" style="font-family: 'Mali', cursive;">{{ entry.title }}</div>
+        {% language 'pt' %}
+        <div class="text-muted small">{{ entry.date_updated|date:'d F, Y' }}</div>
+        {% endlanguage %}
+        <div>{{ entry.text|truncatewords:18 }}</div>
+        <a href="{% url 'farma_site_app:entry' entry.id %}">Ler mais</a>
+      </div>
+      
+    </div>
+    {% empty %}
+    <p>Ainda não há entradas no blog.</p>
+    {% endfor %}
+    <div class="lead text-center p-3"><a href="{% url 'farma_site_app:blog' %}">Leia mais no Blog</a></div>
+
+  </div>
+</section>
+
+
+<!-- Horario -->
+<section class="p-4 bg-light border-top border-1 border-secondary"
+         id="horario"
+         style="scroll-margin-top: 60px;">
+  <div class="container">
+    <p class="display-5 text-secondary">Horário</p>
+    <div>2ª a 6ª-feira: das 9h às 13h e das 14h às 20h.</div>
+    <div>Sábados: das 9h às 13h e das 15h às 19h.</div>
+    <div>Domingos e feriados: fechados.</div>
+    <div class="lead pt-2">Dias de serviço de disponibilidade (ver <a href="{% url 'cal:cal' %}">aqui</a>):</div>
+    <div>2ª-feira a sábado: das 9h às 13h e das 14h às 21h.</div>
+    <div>Domingos e feriados: das 9h às 13h e das 15h às 21h.</div>
+  </div>
+
+</section>
+
+<!-- Sobre -->
+<section class="py-5 px-4 bg-light border-top border-1 border-secondary"
+         id="sobre"
+         style="scroll-margin-top: 60px;">
+  <div class="container">
+    <p class="display-5 text-secondary">Sobre nós</p>
+    <p>A Farmácia Pisco é um estabelecimento com uma história antiga de serviço à população e encontra-se desde 1976 sob a mesma direção.
+      Desde sempre o nosso foco tem sido oferecer o melhor serviço, disponibilizando o melhor aconselhamento e atenção. Para qualquer dúvida,
+      esclarecimento ou resolução de problemas em que possamos ser úteis, pode nos contatar pelos vários canais indicados 
+      <a href="{% url 'farma_site_app:contacto' %}">aqui</a>.</p>
+    <div class="pt-3">
+      <div>
+        <img src="{% static 'farma_site_app/img/foto_equipa.jpg' %}"
+             alt="foto farmacia"
+             class="foto-equipa">
+      </div>
+      <div class="pt-2">
+        <p class="h3 text-secondary"
+           style="font-family: 'Mali', cursive;">Equipa</p>
+        <p class="mb-0">A nossa equipa é composta por pessoas que encontraram na Farmácia a sua vocação e têm grande orgulho em servir bem o público.</p>
+        <p>O Daniel, a Naty, o Luís e a Susana constituem o núcleo principal de Farmacêuticos e Técnicos de Farmácia que implementam um funcionamento eficiente e acolhedor.
+          A Direção Técnica está a cargo da Farmacêutica Dra. Lucília Pisco.
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+
+</section>
+{% endblock content %}
