@@ -4,7 +4,7 @@ from django.db import models
 
 class Servico(models.Model):
     """A Service offered by the farmacy"""
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=75)
     image = models.ImageField(upload_to='imgs')
     text = models.TextField(max_length=300)
 
