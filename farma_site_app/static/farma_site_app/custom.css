@@ -19,8 +19,8 @@
 }
 
 .servico-card {
-  width: 280px;
-  height: min(350px, 50vw);
+  width: 330px;
+  height: min(330px, 50vw);
   overflow: hidden;
 }
 

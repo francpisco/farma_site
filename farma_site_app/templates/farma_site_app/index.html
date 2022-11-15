@@ -34,7 +34,7 @@
     <div class="row g-4 py-4">
 
       {% for servico in servicos %}
-      <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+      <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <div class="servico-card card border border-1 border-secondary">
           <div class="card-body servico-card-child" style="background-image: url({{ servico.image.url }});">
             <p class="h4 text-secondary text-center">{{ servico.title }}</p>
