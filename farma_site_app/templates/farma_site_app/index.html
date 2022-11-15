@@ -35,10 +35,10 @@
 
       {% for servico in servicos %}
       <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex justify-content-center">
-        <div class="servico-card card text-light">
+        <div class="servico-card card border border-1 border-secondary">
           <div class="card-body servico-card-child" style="background-image: url({{ servico.image.url }});">
-            <p class="h4">{{ servico.title }}</p>
-            <p style="font-size: min(14px, 2.5vw);">{{ servico.text }}</p>
+            <p class="h4 text-secondary text-center">{{ servico.title }}</p>
+            <p style="font-size: min(16px, 2.5vw);">{{ servico.text }}</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
       <div>
         <img src="{% static 'farma_site_app/img/foto_equipa.jpg' %}"
              alt="foto farmacia"
-             class="foto-equipa">
+             class="foto-equipa rounded">
       </div>
       <div class="pt-2">
         <p class="h3 text-secondary"
