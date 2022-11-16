@@ -2,10 +2,13 @@
 
 {% block content %}
 
-<div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
-     style="height: 500px;">
-  <p class="lead">Você está log out. Obrigado pela visita.</p>
-  <p><a href="{% url 'farma_site_app:index' %}">Clique aqui para voltar à página principal.</a></p>
+<section class="principal bg-light">
+  <div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
+       style="height: 500px;">
+    <p class="lead">Estás logged out. Até logo!</p>
+    <p><a href="{% url 'farma_site_app:index' %}">Clica aqui para voltar à página principal.</a></p>
 
-</div>
+  </div>
+</section>
+
 {% endblock content %}
