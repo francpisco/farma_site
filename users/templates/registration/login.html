@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
+<section class="principal bg-light">
+  <div class="container mt-5 d-flex flex-column align-items-center justify-content-center"
      style="height: 500px;">
   {% if form.errors %}
   <p class="text-danger">Por favor escreva username e password correctos. Tome atenção às maiúsculas e minúsculas.</p>
@@ -30,6 +31,9 @@
            value="{% url 'farma_site_app:index' %}" />
   </form>
 </div>
+
+</section>
+
 
 <script>
   (function () {
