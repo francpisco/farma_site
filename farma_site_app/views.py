@@ -14,14 +14,14 @@ from .forms import EntryForm, ContactForm
 
 def index(request):
     """The home page."""
-    entries = Entry.objects.order_by('date_added')[:3]
+    entries = Entry.objects.order_by('-date_added')[:3]
     servicos = Servico.objects.order_by('id')
     context = {'entries': entries, 'servicos': servicos}
     return render(request, 'farma_site_app/index.html', context)
 
 def blog(request):
     """The blog page."""
-    object_list = Entry.objects.order_by('date_added')
+    object_list = Entry.objects.order_by('-date_added')
     paginator = Paginator(object_list, 10)  # 10 posts in each page
     page = request.GET.get('page')
     try:
