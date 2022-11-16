@@ -13,9 +13,15 @@ def cal(request):
     """Calendar page"""
     today_s_date = utils.get_todays_date()
     calendar_cells = utils.prepare_calendar_cells(2)
+    info_hoje = None
+
+    for i in range(len(calendar_cells)):
+        if today_s_date == calendar_cells[i][0]:
+            info_hoje = calendar_cells[i]
     
     current_month_str = today_s_date.strftime("%B")
-    context = {'calendar_cells': calendar_cells,
+    context = {'info_hoje': info_hoje,
+               'calendar_cells': calendar_cells,
                'today_s_date': today_s_date,
                'current_month_str': current_month_str}
     return render(request, 'cal/calendar.html', context)

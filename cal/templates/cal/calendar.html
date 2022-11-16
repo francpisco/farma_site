@@ -5,7 +5,20 @@
 <section class="principal bg-light">
   <div class="container mt-5 pt-5">
     <div class="display-5 text-center">Calendário</div>
-    <div class="display-6 text-center p-5">{{ today_s_date.day }} de {{ current_month_str }}, {{ today_s_date.year }}</div>
+    <div class="lead text-center p-5">
+      {% if info_hoje is not none %}
+        Hoje, {{ today_s_date.day }} de {{ current_month_str }}, {{ today_s_date.year }},
+        a Farmácia em Serviço de Disponibilidade é: Farmácia
+        <span class="fw-bold">
+        {% if info_hoje.2.farmacia_de_servico != '0' %}
+          {{ info_hoje.2.farmacia_de_servico }}
+        {% elif info_hoje.3 is not none %}
+          {{ info_hoje.3 }}
+        {% endif %}
+        </span>
+       
+      {% endif %}
+    </div>
     <div class="text-center lead p-2">Farmácia de serviço e outras informações disponiveís para esta semana:</div>
    
     <div class="row pb-3" style="height: min(30vw, 180px);">
