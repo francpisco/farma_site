@@ -55,22 +55,24 @@
   <div class="container">
     <div class="display-5 text-secondary pb-3">Recentemente no nosso Blog:</div>
 
-    {% for entry in entries %}
-    <div class="d-flex py-3">
-      <img src="{{ entry.image.url }}" alt="blog entry image" class="rounded" style="height: 150px; width: 150px">
-      <div class="ps-3">
-        <div class="lead" style="font-family: 'Mali', cursive;">{{ entry.title }}</div>
-        {% language 'pt' %}
-        <div class="text-muted small">{{ entry.date_updated|date:'d F, Y' }}</div>
-        {% endlanguage %}
-        <div>{{ entry.text|truncatewords:18 }}</div>
-        <a href="{% url 'farma_site_app:entry' entry.id %}">Ler mais</a>
+    <div class="row g-4 py-4">
+
+      {% for entry in entries %}
+      <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
+        <div class="blog-card card">
+          <div class="card-body blog-card-child text-light" style="background-image: url({{ entry.image.url }});">
+            <p class="h4 text-center">{{ entry.title }}</p>
+            <p style="font-size: min(16px, 2.5vw);">{{ entry.text|truncatewords:18 }}</p>
+            <a href="{% url 'farma_site_app:entry' entry.id %}">Ler mais</a>
+          </div>
+        </div>
       </div>
-      
+      {% empty %}
+      <p>Ainda não há entradas de blog disponiveis</p>
+      {% endfor %}
+
     </div>
-    {% empty %}
-    <p>Ainda não há entradas no blog.</p>
-    {% endfor %}
+    
     <div class="lead text-center p-3"><a href="{% url 'farma_site_app:blog' %}">Leia mais no Blog</a></div>
 
   </div>
