@@ -26,7 +26,7 @@
           {% language 'pt' %}
           <p class="text-muted small">{{ entry.date_updated|date:'d F, Y' }}</p>
           {% endlanguage %}
-          <p>{{ entry.text }}</p>
+          <p>{{ entry.text|linebreaks }}</p>
 
         </div>
         <div class="col-lg-1"></div>
