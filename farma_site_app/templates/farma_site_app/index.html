@@ -7,19 +7,23 @@
 {% block content %}
 <!-- Showcase -->
 <div style="height: 100vh">
-  <section class="text-center background-photo">
+  <section class="text-center background-photo foto-background">
     <div class="container h-100 w-100 d-flex align-items-center justify-content-end">
-      <div class="p-3 text-light lateral-text rounded" style="background-color: rgba(0, 155, 80, 0.3); background-blend-mode: multiply;">
+      <div class="p-3 text-light lateral-text rounded"
+           style="background-color: rgba(0, 155, 80, 0.3); background-blend-mode: multiply;">
         <img src="{% static 'farma_site_app/img/logo-light.svg' %}"
              alt="logo famacia pisco"
              class="w-100">
         <p class="h4"
            style="font-family: 'Mali', cursive;">A sua Farmácia no Concelho de Mira</p>
-        <p class="h6">Uma farmácia de confiança onde pode encontrar os produtos que precisa com o aconselhamento mais informado.</p>
-        <p class="h6">Tlf: 231 452 466, <a class="h6 text-light" href="{% url 'farma_site_app:contacto' %}" style="text-decoration: none;">Contacte-nos</a></p>
+        <p class="h6">Uma farmácia de confiança onde pode encontrar os produtos que precisa com o aconselhamento mais
+          informado.</p>
+        <p class="h6">Tlf: 231 452 466, <a class="h6 text-light"
+             href="{% url 'farma_site_app:contacto' %}"
+             style="text-decoration: none;">Contacte-nos</a></p>
       </div>
     </div>
-  
+
   </section>
 </div>
 
@@ -35,10 +39,35 @@
 
       {% for servico in servicos %}
       <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
-        <div class="servico-card card border border-1 border-secondary">
-          <div class="card-body servico-card-child" style="background-image: url({{ servico.image.url }});">
-            <p class="h4 text-secondary text-center">{{ servico.title }}</p>
+        <div class="servico-card card text-light" data-bs-toggle="modal" data-bs-target='#{{ servico.title|slugify }}''>
+          <div class="card-body servico-card-child foto-background"
+               style="background-image: url({{ servico.image.url }});">
+            <p class="h4 text-center">{{ servico.title }}</p>
             <p style="font-size: min(16px, 2.5vw);">{{ servico.text }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade"
+           id='{{ servico.title|slugify }}''
+           tabindex="-1"
+           aria-labelledby="{{ servico.title|slugify }}"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"
+                  id="exampleModalLabel">{{ servico.title }}</h5>
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"></button>
+            </div>
+            <img src="{{ servico.image.url }}" alt="{{ servico.title }}">
+            <div class="modal-body">
+              {{ servico.text }}
+            </div>
           </div>
         </div>
       </div>
@@ -51,7 +80,8 @@
 </section>
 
 <!-- Últimas entradas do blog -->
-<section class="py-5 px-4 bg-light border-top border-1 border-secondary" style="scroll-margin-top: 60px;">
+<section class="py-5 px-4 bg-light border-top border-1 border-secondary"
+         style="scroll-margin-top: 60px;">
   <div class="container">
     <div class="display-5 text-secondary pb-3">Recentemente no nosso Blog:</div>
 
@@ -60,19 +90,28 @@
       {% for entry in entries %}
       <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <div class="blog-card card">
-          <div class="card-body blog-card-child text-light" style="background-image: url({{ entry.image.url }});">
-            <p class="h4 text-center">{{ entry.title }}</p>
-            <p style="font-size: min(16px, 2.5vw);">{{ entry.text|truncatewords:18 }}</p>
-            <a href="{% url 'farma_site_app:entry' entry.id %}">Ler mais</a>
-          </div>
+          <a href="{% url 'farma_site_app:entry' entry.id %}"
+             style="height: 100%; text-decoration: none;">
+
+            <div class="card-body blog-card-child foto-background text-light"
+                 style="background-image: url({{ entry.image.url }});">
+
+              <p class="h3 text-center py-3">{{ entry.title }}</p>
+              <p style="font-size: min(16px, 2.5vw);">{{ entry.text|truncatewords:18 }}</p>
+
+
+            </div>
+          </a>
+
         </div>
       </div>
+      
       {% empty %}
       <p>Ainda não há entradas de blog disponiveis</p>
       {% endfor %}
 
     </div>
-    
+
     <div class="lead text-center p-3"><a href="{% url 'farma_site_app:blog' %}">Leia mais no Blog</a></div>
 
   </div>
@@ -101,10 +140,14 @@
          style="scroll-margin-top: 60px;">
   <div class="container">
     <p class="display-5 text-secondary">Sobre nós</p>
-    <p>A Farmácia Pisco é um estabelecimento com uma história antiga de serviço à população e encontra-se desde 1976 sob a mesma direção.
-      Desde sempre o nosso foco tem sido oferecer o melhor serviço, disponibilizando o melhor aconselhamento e atenção. Para qualquer dúvida,
-      esclarecimento ou resolução de problemas em que possamos ser úteis, pode nos contatar pelos vários canais indicados 
-      <a href="{% url 'farma_site_app:contacto' %}">aqui</a>.</p>
+    <p>A Farmácia Pisco é um estabelecimento com uma história antiga de serviço à população e encontra-se desde 1976 sob
+      a mesma direção.
+      Desde sempre o nosso foco tem sido oferecer o melhor serviço, disponibilizando o melhor aconselhamento e atenção.
+      Para qualquer dúvida,
+      esclarecimento ou resolução de problemas em que possamos ser úteis, pode nos contatar pelos vários canais
+      indicados
+      <a href="{% url 'farma_site_app:contacto' %}">aqui</a>.
+    </p>
     <div class="pt-3">
       <div>
         <img src="{% static 'farma_site_app/img/foto_equipa.jpg' %}"
@@ -114,8 +157,10 @@
       <div class="pt-2">
         <p class="h3 text-secondary"
            style="font-family: 'Mali', cursive;">Equipa</p>
-        <p class="mb-0">A nossa equipa é composta por pessoas que encontraram na Farmácia a sua vocação e têm grande orgulho em servir bem o público.</p>
-        <p>O Daniel, a Naty, o Luís e a Susana constituem o núcleo principal de Farmacêuticos e Técnicos de Farmácia que implementam um funcionamento eficiente e acolhedor.
+        <p class="mb-0">A nossa equipa é composta por pessoas que encontraram na Farmácia a sua vocação e têm grande
+          orgulho em servir bem o público.</p>
+        <p>O Daniel, a Naty, o Luís e a Susana constituem o núcleo principal de Farmacêuticos e Técnicos de Farmácia que
+          implementam um funcionamento eficiente e acolhedor.
           A Direção Técnica está a cargo da Farmacêutica Dra. Lucília Pisco.
         </p>
       </div>
