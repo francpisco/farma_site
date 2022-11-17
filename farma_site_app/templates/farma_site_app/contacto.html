@@ -9,15 +9,18 @@
   <div class="container">
 
     <p class="display-4 p-5 text-center">Contacto</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, doloribus amet. Nam recusandae maxime
-      mollitia molestiae, enim minus praesentium illo.</p>
+    <p class="lead text-center">Na Farmácia Pisco teremos todo o gosto em recebê-lo pessoalmente. Se preferir, pode
+      também contactar-nos através de mensagem. Prometemos ser breves na resposta. Em alternativa, também nos pode
+      contactar por telefone para o número <span class="fw-bold">231 452 466</span></p>
     <div class="row pt-4 pb-5">
       <div class="col col-12 col-md-6 p-4">
+        <p class="display-6">Mensagem</p>
         <form method="post">
           {% csrf_token %}
           {{ form.as_p }}
           <div class="form-actions">
-            <button class="btn btn-secondary" type="submit">Enviar</button>
+            <button class="btn btn-secondary"
+                    type="submit">Enviar</button>
 
           </div>
         </form>
@@ -35,6 +38,7 @@
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+
       </div>
     </div>
   </div>
