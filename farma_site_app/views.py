@@ -83,8 +83,10 @@ def contacto(request):
     else:
         form = ContactForm(data=request.POST)
         if form.is_valid():
-            subject = (form.cleaned_data['subject'] 
-                       + ', Nome: ' + form.cleaned_data['name'] 
+            subject = (form.cleaned_data['subject']
+                       + ', WEBSITE' 
+                       + ', de: ' + form.cleaned_data['from_email']
+                       + ', nome: ' + form.cleaned_data['name'] 
                        + ', tlf: ' + form.cleaned_data['phone_number'])
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
