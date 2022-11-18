@@ -7,6 +7,7 @@ class Servico(models.Model):
     title = models.CharField(max_length=75)
     image = models.ImageField(upload_to='imgs')
     text = models.TextField(max_length=200)
+    position = models.IntegerField(default=1)
 
     def save(self, *args, **kwargs):
         """Override save method to resize image before saving to db."""

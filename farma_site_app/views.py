@@ -15,7 +15,7 @@ from .forms import EntryForm, ContactForm
 def index(request):
     """The home page."""
     entries = Entry.objects.order_by('-date_added')[:3]
-    servicos = Servico.objects.order_by('id')
+    servicos = Servico.objects.order_by('position')
     context = {'entries': entries, 'servicos': servicos}
     return render(request, 'farma_site_app/index.html', context)
 
