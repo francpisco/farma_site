@@ -139,6 +139,24 @@
       l.addEventListener('click', () => { bsCollapse.toggle() })
     })
   </script>
+  <script>
+    const scrollToElement = (id) => {
+      const element = document.querySelector(id);
+
+      if (element !== null) {
+        element.classList.remove('hidden');
+        element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      }
+    };
+
+    document.onreadystatechange = () => {
+      if (document.readyState === 'interactive') {
+        if (location.hash !== '') {
+            scrollToElement(location.hash);
+        }
+      }
+    };
+  </script>
   
 </body>
 
