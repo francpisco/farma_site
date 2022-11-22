@@ -139,6 +139,14 @@
       l.addEventListener('click', () => { bsCollapse.toggle() })
     })
   </script>
+  <script>
+    if (location.hash) {
+      setTimeout(function() {
+        el = document.querySelector(location.hash);
+        el.scrollIntoView(true);
+      }, 100);
+    }
+  </script>
 </body>
 
 </html>
